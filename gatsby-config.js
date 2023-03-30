@@ -1,27 +1,36 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
- */
+const dotenv = require("dotenv")
 
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
+if (process.env.NODE_ENV !== "production") {
+  console.log("process.env.NODE_ENV", process.env.NODE_ENV)
+  dotenv.config()
+}
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Starter Blog`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Sachin Patwal`,
+      summary: `who lives and works in Chandigarh building useful things.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `cristiano`,
     },
   },
+
   plugins: [
     `gatsby-plugin-image`,
+    `@contentful/gatsby-transformer-contentful-richtext`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `b7zfp1g5or17`,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
